@@ -1,0 +1,129 @@
+/**
+ * Error Messages Constants
+ *
+ * All user-facing error messages live here in one central place.
+ * Services and exception handlers pull from this file instead of
+ * writing their own error strings.
+ *
+ * Rules:
+ * - Messages are written for humans, not developers
+ * - Never expose field names, database terms, or server internals
+ * - Always tell the user what they can do next where possible
+ * - Keep sentences short — one or two lines maximum
+ * - Use friendly, apologetic language when appropriate
+ *
+ * Used by: ErrorHandler, GlobalExceptionFilter, all services
+ */
+
+export const ERROR_MESSAGES = {
+  // ==================== Auth ====================
+  INVALID_CREDENTIALS:
+    "The email or password you entered is incorrect. Please try again",
+  SESSION_EXPIRED: "Your session has expired. Please log in again to continue",
+  ACCOUNT_NOT_VERIFIED: "Please verify your email address before logging in",
+  UNAUTHORIZED: "You don't have permission to do that",
+  TOKEN_INVALID: "Something went wrong with your session. Please log in again",
+  EMAIL_ALREADY_EXISTS:
+    "An account with that email already exists. Try logging in instead",
+  USERNAME_TAKEN: "This username is already taken. Please try another one",
+  WEAK_PASSWORD:
+    "Password must be at least 8 characters long and contain uppercase, lowercase, and numbers",
+  OTP_INVALID: "The code you entered is incorrect. Please try again",
+  OTP_EXPIRED: "This code has expired. Please request a new one",
+  OTP_RATE_LIMIT: "Please wait a moment before requesting another code",
+
+  // ==================== Users ====================
+  USER_NOT_FOUND: "We couldn't find that user",
+  PROFILE_UPDATE_FAILED: "We couldn't update your profile. Please try again",
+  ACCOUNT_SUSPENDED:
+    "This account has been suspended. Please contact support for assistance",
+
+  // ==================== Content ====================
+  CONTENT_NOT_FOUND: "This post is no longer available",
+  CONTENT_ALREADY_PUBLISHED:
+    "This post has already been published and can't be edited",
+  CONTENT_DELETE_FAILED: "We couldn't delete this post. Please try again",
+  COMMENT_NOT_FOUND: "This comment is no longer available",
+  CANNOT_LIKE_OWN_CONTENT: "You can't like your own post",
+  ALREADY_LIKED: "You've already liked this post",
+  NOT_LIKED: "You haven't liked this post yet",
+
+  // ==================== Bookings ====================
+  BOOKING_NOT_FOUND: "We couldn't find that booking",
+  SLOT_NOT_AVAILABLE:
+    "Sorry, this time slot was just booked by someone else. Please choose another time",
+  BOOKING_ALREADY_CONFIRMED: "This booking has already been confirmed",
+  BOOKING_ALREADY_CANCELLED: "This booking has already been cancelled",
+  CANCELLATION_TOO_LATE:
+    "This booking can't be cancelled anymore. Please contact support if you need help",
+  BOOKING_CANNOT_UPDATE: "This booking can't be updated",
+  INVALID_STATUS_TRANSITION: "This action isn't available right now",
+
+  // ==================== Wallet & Payments ====================
+  WALLET_NOT_FOUND: "We couldn't find your wallet",
+  INSUFFICIENT_BALANCE: "You don't have enough credits for this action",
+  WALLET_FROZEN:
+    "Your wallet is temporarily unavailable. Please contact support for assistance",
+  PAYMENT_FAILED:
+    "Your payment could not be processed. Please check your details and try again",
+  PAYMENT_ALREADY_MADE: "A payment has already been received for this booking",
+  WITHDRAWAL_FAILED: "We couldn't process your withdrawal. Please try again later",
+  INVALID_AMOUNT: "Please enter a valid amount",
+
+  // ==================== Chat ====================
+  CONVERSATION_NOT_FOUND: "This conversation is no longer available",
+  MESSAGE_NOT_FOUND: "This message is no longer available",
+  CANNOT_MESSAGE_BLOCKED_USER: "You can't send messages to this user",
+  NOT_CONVERSATION_MEMBER: "You need to join this group first",
+
+  // ==================== Follows ====================
+  ALREADY_FOLLOWING: "You're already following this user",
+  NOT_FOLLOWING: "You're not following this user",
+  CANNOT_FOLLOW_SELF: "You can't follow yourself",
+
+  // ==================== Reports ====================
+  ALREADY_REPORTED: "You've already reported this",
+  CANNOT_REPORT_OWN_CONTENT: "You can't report your own content",
+
+  // ==================== Blocks ====================
+  ALREADY_BLOCKED: "You've already blocked this user",
+  NOT_BLOCKED: "This user is not blocked",
+  CANNOT_BLOCK_SELF: "You can't block yourself",
+
+  // ==================== Music ====================
+  TRACK_NOT_FOUND: "This track is no longer available",
+  PLAYLIST_NOT_FOUND: "This playlist is no longer available",
+
+  // ==================== Referrals ====================
+  REFERRAL_CODE_INVALID: "This referral code is not valid",
+  REFERRAL_CODE_EXPIRED: "This referral code has expired",
+  REFERRAL_ALREADY_USED: "You've already used a referral code",
+  CANNOT_REFER_SELF: "You can't use your own referral code",
+
+  // ==================== General ====================
+  NOT_FOUND: "We couldn't find what you're looking for",
+  SOMETHING_WENT_WRONG:
+    "Something went wrong on our end. Please try again in a moment",
+  VALIDATION_FAILED: "Please check the information you entered and try again",
+  RATE_LIMITED:
+    "You're doing that a bit too fast. Please wait a moment and try again",
+  FORBIDDEN: "You don't have permission to do that",
+  BAD_REQUEST: "Please check your request and try again",
+  SERVICE_UNAVAILABLE:
+    "This service is temporarily unavailable. Please try again later",
+  FILE_UPLOAD_FAILED: "We couldn't upload your file. Please try again",
+  FILE_TOO_LARGE: "This file is too large. Please choose a smaller file",
+  INVALID_FILE_TYPE: "This file type is not supported",
+
+  // ==================== Livestream ====================
+  LIVESTREAM_NOT_FOUND: "This livestream has ended or is no longer available",
+  LIVESTREAM_ALREADY_ACTIVE: "You already have an active livestream",
+  SCREEN_SHARE_FAILED: "We couldn't start the screen share. Please check your permissions",
+  NOT_THE_HOST: "Only the host can perform this action",
+  STREAM_TOKEN_ERROR: "We couldn't secure your connection to the stream. Please try again",
+} as const
+
+/**
+ * Type helper for error message keys
+ */
+export type ErrorMessageKey = keyof typeof ERROR_MESSAGES

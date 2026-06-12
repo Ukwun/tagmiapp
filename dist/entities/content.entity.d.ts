@@ -1,0 +1,30 @@
+import { User } from "./user.entity";
+import { ContentInteraction } from "./content-interaction.entity";
+import { Comment } from "./comment.entity";
+export declare class Content {
+    id: string;
+    userId: string;
+    contentType: "text" | "image" | "video" | "audio";
+    mediaUrl: string;
+    thumbnailUrl: string;
+    caption: string;
+    backgroundColor: string;
+    hashtags: string[];
+    duration: number;
+    isSplitVideo: boolean;
+    parentContentId: string;
+    sequenceNumber: number;
+    totalParts: number;
+    viewCount: number;
+    likeCount: number;
+    commentCount: number;
+    shareCount: number;
+    isActive: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+    user: User;
+    parentContent: Content;
+    childParts: Content[];
+    interactions: ContentInteraction[];
+    contentComments: Comment[];
+}
