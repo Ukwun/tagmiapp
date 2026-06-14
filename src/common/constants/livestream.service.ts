@@ -1,9 +1,9 @@
 import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Livestream } from './livestream.entity';
-import { LivestreamParticipant, LivestreamRole } from './livestream-participant.entity';
-import { LivestreamFile } from './livestream-file.entity';
+import { Repository, LessThan } from 'typeorm';
+import { Livestream } from '../../livestream/livestream.entity';
+import { LivestreamParticipant, LivestreamRole } from '../../livestream/livestream.participant.entity';
+import { LivestreamFile } from '../../livestream/livestream.file.entity';
 import { ErrorHandler } from '../exceptions/error.handler';
 import { ERROR_MESSAGES } from './error-messages.constant';
 import { AuthorizationHelper } from '../guards/authorization.helper';
@@ -40,6 +40,7 @@ export class LivestreamService {
       description,
       status: 'live',
       roomName: `room_${userId}_${Date.now()}`,
+      startedAt: new Date(),
     });
 
     const savedStream = await this.livestreamRepository.save(stream);
@@ -63,17 +64,43 @@ export class LivestreamService {
       throw new BadRequestException(ERROR_MESSAGES.LIVESTREAM_NOT_FOUND);
     }
 
-    return this.participantRepository.save({
-      livestreamId: streamId,
-      userId,
-      role: LivestreamRole.PARTICIPANT,
+    const existing = await this.participantRepository.findOne({
+      where: { livestreamId: streamId, userId }
     });
+
+    if (existing) {
+      return existing;
+    }
+
+    return this.participantRepository.save(
+      this.participantRepository.create({
+        livestreamId: streamId,
+        userId,
+        role: LivestreamRole.PARTICIPANT,
+      })
+    );
+  }
+
+  /**
+   * Updates the 'last active' timestamp for a participant.
+   * Used for intelligent presence tracking.
+   */
+  async updateHeartbeat(streamId: string, userId: string): Promise<void> {
+    await this.participantRepository.update(
+      { livestreamId: streamId, userId },
+      { lastActiveAt: new Date() }
+    );
   }
 
   /**
    * Persists a shared file record to the database.
    */
   async shareFile(streamId: string, userId: string, fileUrl: string, fileType: string): Promise<LivestreamFile> {
+    const stream = await this.livestreamRepository.findOne({ where: { id: streamId } });
+    if (!stream || stream.status !== 'live') {
+      throw new BadRequestException(ERROR_MESSAGES.LIVESTREAM_NOT_FOUND);
+    }
+
     const file = this.fileRepository.create({ livestreamId: streamId, uploadedBy: userId, fileUrl, fileType });
     return this.fileRepository.save(file);
   }
@@ -98,7 +125,7 @@ export class LivestreamService {
     at.addGrant({
       roomJoin: true,
       room: stream.roomName,
-      canPublish: stream.hostId === userId, // Only host can publish by default
+      canPublish: stream.hostId === userId, 
       canSubscribe: true,
     });
 
@@ -107,7 +134,6 @@ export class LivestreamService {
 
   /**
    * Toggles the screen sharing state.
-   * This allows the frontend to update UI for all participants (e.g., showing the PDF).
    */
   async toggleScreenShare(streamId: string, userId: string, isSharing: boolean, presentationUrl?: string): Promise<Livestream> {
     const stream = await this.livestreamRepository.findOne({ where: { id: streamId } });
@@ -116,7 +142,6 @@ export class LivestreamService {
       throw new BadRequestException(ERROR_MESSAGES.LIVESTREAM_NOT_FOUND);
     }
 
-    // Only the host can toggle presentation/screen share
     AuthorizationHelper.verifyOwnership(stream.hostId, userId, ERROR_MESSAGES.NOT_THE_HOST);
 
     stream.isScreenSharing = isSharing;
@@ -135,9 +160,11 @@ export class LivestreamService {
       throw new BadRequestException(ERROR_MESSAGES.LIVESTREAM_NOT_FOUND);
     }
 
-    // Only the host can change the page
     AuthorizationHelper.verifyOwnership(stream.hostId, userId, ERROR_MESSAGES.NOT_THE_HOST);
 
+    await this.livestreamRepository.update(streamId, { currentPdfPage: page });
+    
+    // Return the updated state for the gateway to broadcast
     stream.currentPdfPage = page;
     
     return this.livestreamRepository.save(stream);
@@ -153,14 +180,54 @@ export class LivestreamService {
 
     AuthorizationHelper.verifyOwnership(stream.hostId, userId, ERROR_MESSAGES.NOT_THE_HOST);
 
-    stream.status = 'ended';
-    await this.livestreamRepository.save(stream);
+    await this.livestreamRepository.update(streamId, { 
+      status: 'ended', 
+      endedAt: new Date() 
+    });
   }
 
-  async getActiveStreams(): Promise<Livestream[]> {
-    return this.livestreamRepository.find({
-      where: { status: 'live' },
+  /**
+   * Paginated active streams with category filtering.
+   * Essential for a realistic "Explore" feed on the Play Store.
+   */
+  async getActiveStreams(page: number, limit: number, category?: string) {
+    const skip = (page - 1) * limit;
+    const [streams, total] = await this.livestreamRepository.findAndCount({
+      where: { status: 'live', ...(category && { category }) },
       relations: ['host'],
+      order: { startedAt: 'DESC' },
+      take: limit,
+      skip,
+    });
+    return { streams, total, page, lastPage: Math.ceil(total / limit) };
+  }
+
+  /**
+   * Checks if a user is the host of a given stream.
+   * Used for intelligent permission verification.
+   */
+  async isHost(streamId: string, userId: string): Promise<boolean> {
+    const stream = await this.livestreamRepository.findOne({ where: { id: streamId } });
+    return stream?.hostId === userId;
+  }
+
+  /**
+   * Retrieves all participants for a specific stream.
+   */
+  async getParticipants(streamId: string): Promise<LivestreamParticipant[]> {
+    return this.participantRepository.find({
+      where: { livestreamId: streamId },
+    });
+  }
+
+  /**
+   * Global Intelligent Cleanup: Removes participants who haven't sent a heartbeat in 60 seconds
+   * across all active streams.
+   */
+  async cleanupAllInactiveParticipants(): Promise<void> {
+    const expiryTime = new Date(Date.now() - 60000); // 1 minute threshold
+    await this.participantRepository.delete({
+      lastActiveAt: LessThan(expiryTime),
     });
   }
 }

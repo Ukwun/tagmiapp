@@ -19,6 +19,7 @@ import { AdminModule } from "./admin/admin.module"
 import { MusicModule } from "./music/music.module"
 import { RedisModule } from "./config/redis.module"
 import { CommonModule } from "./common/common.module"
+import { LivestreamModule } from "./livestream/livestream.module"
 
 @Module({
   imports: [
@@ -63,6 +64,7 @@ import { CommonModule } from "./common/common.module"
     WalletModule,
     AdminModule,
     MusicModule,
+    LivestreamModule,
   ],
 })
 export class AppModule {}
