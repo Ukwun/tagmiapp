@@ -21,6 +21,8 @@ async function bootstrap() {
     app.enableCors({
         origin: (origin, callback) => {
             if (!origin || allowedOrigins.includes(origin)) {
+                if (!origin)
+                    console.log('📱 Request received from mobile/local device');
                 callback(null, origin || true);
             }
             else {
@@ -49,6 +51,7 @@ async function bootstrap() {
     const server = app.getHttpServer();
     server.setTimeout(600000);
     server.keepAliveTimeout = 620000;
+    console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
     const port = process.env.PORT || 6000;
     await app.listen(port, "0.0.0.0");
     console.log(`🚀 Tagmi API running on http://localhost:${port}`);

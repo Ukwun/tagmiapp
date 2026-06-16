@@ -28,6 +28,7 @@ const admin_module_1 = require("./admin/admin.module");
 const music_module_1 = require("./music/music.module");
 const redis_module_1 = require("./config/redis.module");
 const common_module_1 = require("./common/common.module");
+const livestream_module_1 = require("./common/constants/livestream.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -49,7 +50,9 @@ exports.AppModule = AppModule = __decorate([
                 password: process.env.DB_PASSWORD || "",
                 database: process.env.DB_DATABASE || "hashtag_db",
                 autoLoadEntities: true,
-                synchronize: process.env.NODE_ENV !== "production",
+                synchronize: false,
+                migrations: ["dist/migrations/*.js"],
+                migrationsRun: true,
                 ...((process.env.DB_HOST && process.env.DB_HOST !== "localhost" && process.env.DB_HOST !== "127.0.0.1") && {
                     ssl: { rejectUnauthorized: false },
                 }),
@@ -71,6 +74,7 @@ exports.AppModule = AppModule = __decorate([
             wallet_module_1.WalletModule,
             admin_module_1.AdminModule,
             music_module_1.MusicModule,
+            livestream_module_1.LivestreamModule,
         ],
     })
 ], AppModule);

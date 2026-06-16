@@ -18,6 +18,7 @@ const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const chat_service_1 = require("./chat.service");
 const notifications_service_1 = require("../notifications/notifications.service");
+const error_utils_1 = require("../common/utils/error.utils");
 let ChatGateway = class ChatGateway {
     constructor(chatService, jwtService, notificationsService) {
         this.chatService = chatService;
@@ -89,7 +90,7 @@ let ChatGateway = class ChatGateway {
             client.to(`room:${roomId}`).emit("userJoined", { userId, roomId });
         }
         catch (error) {
-            client.emit("error", { message: error.message });
+            client.emit("error", { message: (0, error_utils_1.getErrorMessage)(error) });
         }
     }
     handleLeaveRoom(roomId, client) {
@@ -100,7 +101,7 @@ let ChatGateway = class ChatGateway {
             client.to(`room:${roomId}`).emit("userLeft", { userId, roomId });
         }
         catch (error) {
-            client.emit("error", { message: error.message });
+            client.emit("error", { message: (0, error_utils_1.getErrorMessage)(error) });
         }
     }
     async handleMessage(data, client) {
@@ -121,7 +122,7 @@ let ChatGateway = class ChatGateway {
         }
         catch (error) {
             console.error("Error sending message:", error);
-            client.emit("error", { message: error.message });
+            client.emit("error", { message: (0, error_utils_1.getErrorMessage)(error) });
         }
     }
     async handleMarkAsRead(data, client) {
@@ -134,7 +135,7 @@ let ChatGateway = class ChatGateway {
             });
         }
         catch (error) {
-            client.emit("error", { message: error.message });
+            client.emit("error", { message: (0, error_utils_1.getErrorMessage)(error) });
         }
     }
     handleTyping(data, client) {
@@ -146,7 +147,7 @@ let ChatGateway = class ChatGateway {
             });
         }
         catch (error) {
-            client.emit("error", { message: error.message });
+            client.emit("error", { message: (0, error_utils_1.getErrorMessage)(error) });
         }
     }
     async handleEditMessage(data, client) {
@@ -160,7 +161,7 @@ let ChatGateway = class ChatGateway {
             });
         }
         catch (error) {
-            client.emit("error", { message: error.message });
+            client.emit("error", { message: (0, error_utils_1.getErrorMessage)(error) });
         }
     }
     async handleDeleteMessage(data, client) {
@@ -172,7 +173,7 @@ let ChatGateway = class ChatGateway {
             });
         }
         catch (error) {
-            client.emit("error", { message: error.message });
+            client.emit("error", { message: (0, error_utils_1.getErrorMessage)(error) });
         }
     }
     async emitNewMessage(roomId, message) {

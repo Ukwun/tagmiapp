@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WalletService = void 0;
 const common_1 = require("@nestjs/common");
+const error_messages_constant_1 = require("../common/constants/error-messages.constant");
 const wallet_transaction_entity_1 = require("./entities/wallet-transaction.entity");
 const withdrawal_request_entity_1 = require("./entities/withdrawal-request.entity");
 const wallet_repository_1 = require("./repositories/wallet.repository");
@@ -219,6 +220,28 @@ let WalletService = class WalletService {
             skip: (page - 1) * limit,
         });
         return { data: withdrawals, total, page, limit, hasNext: page * limit < total, hasPrev: page > 1 };
+    }
+    async holdPayment(senderId, receiverId, amount) {
+        const senderWallet = await this.getOrCreateWallet(senderId);
+        if (senderWallet.isFrozen)
+            throw new common_1.BadRequestException(error_messages_constant_1.ERROR_MESSAGES.WALLET_FROZEN);
+        if (Number(senderWallet.withdrawableBalance) < amount) {
+            throw new common_1.BadRequestException(error_messages_constant_1.ERROR_MESSAGES.INSUFFICIENT_BALANCE);
+        }
+        const receiverWallet = await this.getOrCreateWallet(receiverId);
+        senderWallet.withdrawableBalance = Number(senderWallet.withdrawableBalance) - amount;
+        receiverWallet.pendingBalance = Number(receiverWallet.pendingBalance) + amount;
+        await this.walletRepository.save(senderWallet);
+        await this.walletRepository.save(receiverWallet);
+    }
+    async releaseEscrow(receiverId, amount) {
+        const wallet = await this.getOrCreateWallet(receiverId);
+        if (Number(wallet.pendingBalance) < amount) {
+            throw new common_1.BadRequestException(error_messages_constant_1.ERROR_MESSAGES.WITHDRAWAL_FAILED);
+        }
+        wallet.pendingBalance = Number(wallet.pendingBalance) - amount;
+        wallet.withdrawableBalance = Number(wallet.withdrawableBalance) + amount;
+        await this.walletRepository.save(wallet);
     }
 };
 exports.WalletService = WalletService;

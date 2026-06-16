@@ -51,4 +51,6 @@ export declare class WalletService {
         hasNext: boolean;
         hasPrev: boolean;
     }>;
+    holdPayment(senderId: string, receiverId: string, amount: number): Promise<void>;
+    releaseEscrow(receiverId: string, amount: number): Promise<void>;
 }

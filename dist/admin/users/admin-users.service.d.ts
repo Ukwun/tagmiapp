@@ -45,7 +45,7 @@ export declare class AdminUsersService {
         data: {
             id: string;
             title: string;
-            status: "pending" | "accepted" | "rejected" | "in_progress" | "completed" | "cancelled" | "paid";
+            status: "rejected" | "pending" | "completed" | "cancelled" | "accepted" | "in_progress" | "paid";
             bookingType: string;
             price: number;
             finalAmount: number;
