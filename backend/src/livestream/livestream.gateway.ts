@@ -21,17 +21,17 @@ export class LivestreamGateway {
   handleJoinRoom(
     @ConnectedSocket() client: Socket,
     @MessageBody() roomId: string,
-  ): void {
+  ): any {
     client.join(roomId);
   }
 
   @SubscribeMessage('sendMessage')
-  handleSendMessage(@MessageBody() data: { roomId: string; user: string; content: string }): void {
+  handleSendMessage(@MessageBody() data: { roomId: string; user: string; content: string }): any {
     this.server.to(data.roomId).emit('newMessage', data);
   }
 
   @SubscribeMessage('sendReaction')
-  handleReaction(@MessageBody() data: { roomId: string; emoji: string }): void {
+  handleReaction(@MessageBody() data: { roomId: string; emoji: string }): any {
     this.server.to(data.roomId).emit('onReaction', data);
   }
 }
