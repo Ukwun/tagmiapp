@@ -110,7 +110,7 @@ async function main() {
 
         processedCount++
       } catch (error) {
-        console.error(`  ❌ Failed: ${error.message}`)
+        console.error(`  ❌ Failed: ${(error as any).message}`)
         failCount++
         processedCount++
       }
@@ -156,3 +156,4 @@ main().catch(error => {
   console.error("\n❌ Backfill script failed:", error)
   process.exit(1)
 })
+

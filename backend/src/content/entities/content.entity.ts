@@ -124,7 +124,7 @@ export class Content {
   @Column({ default: true })
   isActive: boolean
 
-  @Column({ type: "timestamp", nullable: true })
+  @Column({ type: "datetime", nullable: true })
   scheduledAt: Date | null
 
   @Column({ default: false })
@@ -168,5 +168,6 @@ export class Content {
   )
   contentComments: Comment[]
 }
+
 
 

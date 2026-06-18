@@ -18,7 +18,7 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
     })
 
     this.client.on("error", (err) => {
-      this.logger.warn(`Redis connection error: ${err.message}`)
+      this.logger.warn(`Redis connection error: ${(err as any).message}`)
     })
 
     this.client.on("connect", () => {
@@ -26,7 +26,7 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
     })
 
     this.client.connect().catch((err) => {
-      this.logger.warn(`Redis unavailable, falling back to direct DB: ${err.message}`)
+      this.logger.warn(`Redis unavailable, falling back to direct DB: ${(err as any).message}`)
     })
   }
 
@@ -143,3 +143,4 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
     await this.client.del(...keys)
   }
 }
+

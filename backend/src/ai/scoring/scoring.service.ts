@@ -64,7 +64,7 @@ export class ScoringService {
         this.logger.log(`Flushed ${totalFlushed} engagement signals from Redis to DB`)
       }
     } catch (error) {
-      this.logger.error("Failed to flush signal queue", error.stack)
+      this.logger.error("Failed to flush signal queue", (error as any).stack)
     }
   }
 
@@ -366,3 +366,4 @@ export class ScoringService {
     }
   }
 }
+

@@ -10,5 +10,5 @@ export function getErrorMessage(error: unknown): string {
  * Safely extracts the stack trace from an unknown error object.
  */
 export function getErrorStack(error: unknown): string | undefined {
-  return error instanceof Error ? error.stack : undefined;
+  return error instanceof Error ? (error as any).stack : undefined;
 }

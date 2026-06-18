@@ -41,13 +41,13 @@ export class ChatMessage {
   @Column({ default: false })
   isEdited: boolean
 
-  @Column({ type: "timestamp", nullable: true })
+  @Column({ type: "datetime", nullable: true })
   editedAt: Date | null
 
   @Column({ default: false })
   isDeleted: boolean
 
-  @Column({ type: "timestamp", nullable: true })
+  @Column({ type: "datetime", nullable: true })
   deletedAt: Date | null
 
   @CreateDateColumn()

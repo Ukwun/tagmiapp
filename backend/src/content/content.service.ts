@@ -76,7 +76,7 @@ export class ContentService {
         await this.validationPipelineService.runValidation(referral.id)
       }
     } catch (error) {
-      this.logger.warn(`Failed to trigger referral validation for user ${userId}: ${error.message}`)
+      this.logger.warn(`Failed to trigger referral validation for user ${userId}: ${(error as any).message}`)
     }
   }
 
@@ -125,7 +125,7 @@ export class ContentService {
               slide.caption,
             )
           } catch (error) {
-            this.logger.warn(`Failed to analyze from buffer for ${slide.id}: ${error.message}`)
+            this.logger.warn(`Failed to analyze from buffer for ${slide.id}: ${(error as any).message}`)
             // Fallback to CDN if buffer analysis fails
             result = await this.mediaAnalysisService.analyzeContent(
               slide.contentType as "video" | "image" | "audio",
@@ -145,7 +145,7 @@ export class ContentService {
               slide.caption,
             )
           } catch (error) {
-            this.logger.warn(`Failed to analyze from disk path for ${slide.id}: ${error.message}`)
+            this.logger.warn(`Failed to analyze from disk path for ${slide.id}: ${(error as any).message}`)
             // Fallback to CDN if disk analysis fails
             result = await this.mediaAnalysisService.analyzeContent(
               slide.contentType as "video" | "image" | "audio",
@@ -548,7 +548,7 @@ export class ContentService {
       // This runs asynchronously — the user gets their response immediately.
       // Pass fileBuffers so analysis uses local files instead of downloading from CDN.
       this.analyzePostContent(slides, fileBuffers).catch(err => {
-        this.logger.warn(`Media analysis failed for post ${postId}: ${err.message}`)
+        this.logger.warn(`Media analysis failed for post ${postId}: ${(err as any).message}`)
       })
 
       return {
@@ -981,7 +981,7 @@ export class ContentService {
           const preferences = await this.userPreferenceRepository.findByUserId(currentUserId)
           usePersonalizedFeed = preferences.length > 0
         } catch (error) {
-          this.logger.warn(`Failed to check user preferences for personalized feed: ${error.message}`)
+          this.logger.warn(`Failed to check user preferences for personalized feed: ${(error as any).message}`)
         }
       } else {
         this.logger.warn(`Invalid currentUserId for personalized feed: "${currentUserId}"`)
@@ -1077,7 +1077,7 @@ export class ContentService {
           total = countResult
         }
       } catch (error) {
-        this.logger.error(`Personalized feed failed, falling back to randomized: ${error.message}`)
+        this.logger.error(`Personalized feed failed, falling back to randomized: ${(error as any).message}`)
         // Fall back to randomized feed on error
         const result = await this.fetchRandomizedFeed(pageNum, limitNum, NEW_CUTOFF_DAYS, NEW_RATIO)
         firstSlides = result.slides
@@ -1867,7 +1867,7 @@ export class ContentService {
       if (this.userPreferenceLearningService) {
         this.userPreferenceLearningService
           .updatePreferencesFromEngagement(userId, contentId, { type: "like" })
-          .catch(error => this.logger.warn(`Failed to update preferences after like: ${error.message}`))
+          .catch(error => this.logger.warn(`Failed to update preferences after like: ${(error as any).message}`))
       }
 
       return { liked: true, likesCount: content.likeCount }
@@ -1993,7 +1993,7 @@ export class ContentService {
     if (this.userPreferenceLearningService) {
       this.userPreferenceLearningService
         .updatePreferencesFromEngagement(userId, contentId, { type: "comment" })
-        .catch((error: any) => this.logger.warn(`Failed to update preferences after comment: ${error.message}`))
+        .catch((error: any) => this.logger.warn(`Failed to update preferences after comment: ${(error as any).message}`))
     }
 
     const commentWithUser = await this.commentRepository.findOne({
@@ -2182,14 +2182,14 @@ export class ContentService {
         if (this.userPreferenceLearningService) {
           this.userPreferenceLearningService
             .updatePreferencesFromEngagement(userId, firstSlide.id, { type: "share" })
-            .catch((error: any) => this.logger.warn(`Failed to update preferences after share: ${error.message}`))
+            .catch((error: any) => this.logger.warn(`Failed to update preferences after share: ${(error as any).message}`))
         }
       } else if (type === "bookmark") {
         // Update user preferences based on save/bookmark (fire-and-forget)
         if (this.userPreferenceLearningService) {
           this.userPreferenceLearningService
             .updatePreferencesFromEngagement(userId, firstSlide.id, { type: "save" })
-            .catch((error: any) => this.logger.warn(`Failed to update preferences after save: ${error.message}`))
+            .catch((error: any) => this.logger.warn(`Failed to update preferences after save: ${(error as any).message}`))
         }
       }
 
@@ -2394,7 +2394,7 @@ export class ContentService {
               type: "watch",
               metadata: { watchTimePercent },
             })
-            .catch((error: any) => this.logger.warn(`Failed to update preferences after watch signal: ${error.message}`))
+            .catch((error: any) => this.logger.warn(`Failed to update preferences after watch signal: ${(error as any).message}`))
         }
       }
     }
@@ -2476,7 +2476,7 @@ export class ContentService {
           }
         }
       } catch (err) {
-        this.logger.warn(`Failed to aggregate signals for posts: ${err.message}`)
+        this.logger.warn(`Failed to aggregate signals for posts: ${(err as any).message}`)
       }
     }
 
@@ -2640,9 +2640,10 @@ export class ContentService {
     } catch (err) {
       await fs.unlink(outputPath).catch(() => {})
       await fs.rmdir(tmpDir).catch(() => {})
-      this.logger.error(`Failed to extract segment for slide ${slideId}: ${err.message}`)
+      this.logger.error(`Failed to extract segment for slide ${slideId}: ${(err as any).message}`)
       // Fallback: redirect to full video
       res.redirect(slide.mediaUrl)
     }
   }
 }
+

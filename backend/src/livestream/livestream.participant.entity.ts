@@ -36,10 +36,10 @@ role: LivestreamRole;
 @CreateDateColumn()
 joinedAt: Date;
 
-@Column({ nullable: true, type: "timestamp" })
+@Column({ nullable: true, type: "datetime" })
 leftAt: Date;
 
-  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+  @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
   lastActiveAt: Date;
 
   @ManyToOne(() => Livestream, (l) => l.participants)
@@ -50,4 +50,5 @@ leftAt: Date;
   @JoinColumn({ name: "userId" })
   user: User;
 }
+
 

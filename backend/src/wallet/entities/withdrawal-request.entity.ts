@@ -51,7 +51,7 @@ export class WithdrawalRequest {
   @Column({ nullable: true })
   processedBy: string
 
-  @Column({ type: "timestamp", nullable: true })
+  @Column({ type: "datetime", nullable: true })
   processedAt: Date
 
   @CreateDateColumn()
@@ -64,4 +64,5 @@ export class WithdrawalRequest {
   @JoinColumn({ name: "userId" })
   user: User
 }
+
 

@@ -63,7 +63,7 @@ export class FollowsService {
           await this.validationPipelineService.runValidation(referral.id)
         }
       } catch (error) {
-        this.logger.warn(`Failed to trigger referral validation for user ${followerId}: ${error.message}`)
+        this.logger.warn(`Failed to trigger referral validation for user ${followerId}: ${(error as any).message}`)
       }
     }
 

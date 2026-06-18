@@ -81,7 +81,7 @@ export class MediaAnalysisService {
           return { transcription: null, aiDescription: null, categories: null }
       }
     } catch (error) {
-      this.logger.warn(`Media analysis failed for ${contentType}: ${error.message}`)
+      this.logger.warn(`Media analysis failed for ${contentType}: ${(error as any).message}`)
       return { transcription: null, aiDescription: null, categories: null }
     }
   }
@@ -118,7 +118,7 @@ export class MediaAnalysisService {
           return { transcription: null, aiDescription: null, categories: null }
       }
     } catch (error) {
-      this.logger.warn(`Media analysis from file failed for ${contentType}: ${error.message}`)
+      this.logger.warn(`Media analysis from file failed for ${contentType}: ${(error as any).message}`)
       return { transcription: null, aiDescription: null, categories: null }
     }
   }
@@ -250,7 +250,7 @@ export class MediaAnalysisService {
       const result = await this.callClaudeText(caption)
       return { transcription: null, ...result }
     } catch (error) {
-      this.logger.warn(`Audio categorization failed: ${error.message}`)
+      this.logger.warn(`Audio categorization failed: ${(error as any).message}`)
       return { transcription: null, aiDescription: null, categories: null }
     }
   }
@@ -383,7 +383,7 @@ confidence: 0.0 to 1.0. If nothing matches, return empty categories array.`,
 
       return { aiDescription, categories: categories?.length ? categories : null }
     } catch (error) {
-      this.logger.warn(`Failed to parse Claude response: ${error.message}`)
+      this.logger.warn(`Failed to parse Claude response: ${(error as any).message}`)
       return { aiDescription: null, categories: null }
     }
   }
@@ -428,7 +428,7 @@ confidence: 0.0 to 1.0. If nothing matches, return empty categories array.`,
 
       return framePaths
     } catch (error) {
-      this.logger.warn(`Frame extraction failed: ${error.message}`)
+      this.logger.warn(`Frame extraction failed: ${(error as any).message}`)
       return []
     }
   }
@@ -488,7 +488,7 @@ confidence: 0.0 to 1.0. If nothing matches, return empty categories array.`,
       const transcription = stdout.trim()
       return transcription.length > 0 ? transcription : null
     } catch (error) {
-      this.logger.warn(`Audio transcription failed: ${error.message}`)
+      this.logger.warn(`Audio transcription failed: ${(error as any).message}`)
       return null
     }
   }
@@ -576,3 +576,4 @@ confidence: 0.0 to 1.0. If nothing matches, return empty categories array.`,
     }
   }
 }
+

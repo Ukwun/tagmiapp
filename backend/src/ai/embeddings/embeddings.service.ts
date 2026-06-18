@@ -27,7 +27,7 @@ export class EmbeddingsService implements OnModuleInit {
   async onModuleInit() {
     // Load model in the background to not block startup
     this.loadModel().catch((err) => {
-      this.logger.warn("Failed to load embedding model on startup — will retry on first use", err.message)
+      this.logger.warn("Failed to load embedding model on startup — will retry on first use", (err as any).message)
     })
   }
 
@@ -41,7 +41,7 @@ export class EmbeddingsService implements OnModuleInit {
       this.pipeline = await pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2")
       this.logger.log("Embedding model loaded successfully")
     } catch (error) {
-      this.logger.error("Failed to load embedding model", error.message)
+      this.logger.error("Failed to load embedding model", (error as any).message)
       this.pipeline = null
     } finally {
       this.isModelLoading = false
@@ -61,7 +61,7 @@ export class EmbeddingsService implements OnModuleInit {
       const output = await this.pipeline(text, { pooling: "mean", normalize: true })
       return Array.from(output.data)
     } catch (error) {
-      const message = error instanceof Error ? error.message : String(error)
+      const message = error instanceof Error ? (error as any).message : String(error)
       this.logger.error("Failed to generate embedding", message)
       return null
     }
@@ -309,3 +309,4 @@ export class EmbeddingsService implements OnModuleInit {
     return this.pipeline !== null
   }
 }
+

@@ -36,7 +36,7 @@ export class User {
   })
   role: "talent" | "client" | "manager"
 
-  @Column({ type: "timestamp", nullable: true })
+  @Column({ type: "datetime", nullable: true })
   lastLogin: Date
 
   @Column({ nullable: true })
@@ -109,4 +109,5 @@ export class User {
   @OneToOne(() => TalentProfile, (tp) => tp.user)
   talentProfile: TalentProfile
 }
+
 

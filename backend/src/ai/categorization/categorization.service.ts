@@ -32,7 +32,7 @@ export class CategorizationService implements OnModuleInit {
   async onModuleInit() {
     // Pre-compute category embeddings in the background
     this.precomputeCategoryEmbeddings().catch((err) => {
-      this.logger.warn("Failed to precompute category embeddings — will retry on first use", err.message)
+      this.logger.warn("Failed to precompute category embeddings — will retry on first use", (err as any).message)
     })
   }
 
@@ -123,3 +123,4 @@ export class CategorizationService implements OnModuleInit {
     return [...TALENT_CATEGORIES]
   }
 }
+

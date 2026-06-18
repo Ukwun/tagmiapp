@@ -25,7 +25,7 @@ export class PhoneVerification {
   @Column({ nullable: true })
   otpHash: string
 
-  @Column({ type: "timestamp", nullable: true })
+  @Column({ type: "datetime", nullable: true })
   otpExpiresAt: Date
 
   @Column({ default: 0 })
@@ -34,3 +34,4 @@ export class PhoneVerification {
   @CreateDateColumn()
   createdAt: Date
 }
+

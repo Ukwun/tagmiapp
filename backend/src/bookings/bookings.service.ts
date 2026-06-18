@@ -41,7 +41,7 @@ export class BookingsService implements OnModuleInit {
       `)
       this.logger.log("Booking status enum verified")
     } catch (error) {
-      this.logger.warn(`Could not update booking status enum: ${error.message}`)
+      this.logger.warn(`Could not update booking status enum: ${(error as any).message}`)
     }
   }
 
@@ -231,3 +231,4 @@ export class BookingsService implements OnModuleInit {
     }
   }
 }
+

@@ -48,7 +48,7 @@ export class EmailService {
         `,
       })
     } catch (error) {
-      this.logger.error(`Failed to send verification code to ${email}: ${error.message}`)
+      this.logger.error(`Failed to send verification code to ${email}: ${(error as any).message}`)
       throw new BadRequestException("Failed to send verification email. Please try again")
     }
   }
@@ -81,8 +81,9 @@ export class EmailService {
         `,
       })
     } catch (error) {
-      this.logger.error(`Failed to send password reset code to ${email}: ${error.message}`)
+      this.logger.error(`Failed to send password reset code to ${email}: ${(error as any).message}`)
       throw new BadRequestException("Failed to send password reset email. Please try again")
     }
   }
 }
+

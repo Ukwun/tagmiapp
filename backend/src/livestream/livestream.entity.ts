@@ -41,10 +41,10 @@ activePresentationUrl: string;
 @Column({ default: 1 })
 currentPdfPage: number;
 
-@Column({ nullable: true, type: "timestamp" })
+@Column({ nullable: true, type: "datetime" })
 startedAt: Date;
 
-@Column({ nullable: true, type: "timestamp" })
+@Column({ nullable: true, type: "datetime" })
 endedAt: Date;
 
 @CreateDateColumn()
@@ -63,3 +63,4 @@ updatedAt: Date;
   @OneToMany(() => LivestreamFile, (f) => f.livestream)
   files: LivestreamFile[];
 }
+

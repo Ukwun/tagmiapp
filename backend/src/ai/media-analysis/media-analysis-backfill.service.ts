@@ -107,7 +107,7 @@ export class MediaAnalysisBackfillService {
 
             totalProcessed++
           } catch (error) {
-            const message = error instanceof Error ? error.message : String(error)
+            const message = error instanceof Error ? (error as any).message : String(error)
             this.logger.warn(`Backfill failed for content ${content.id}: ${message}`)
             await this.contentRepository.update(content.id, {
               aiDescription: "",
@@ -125,11 +125,12 @@ export class MediaAnalysisBackfillService {
 
       this.logger.log(`Media analysis backfill complete: ${totalProcessed} items processed`)
     } catch (error) {
-      const message = error instanceof Error ? error.message : String(error)
-      const stack = error instanceof Error ? error.stack : undefined
+      const message = error instanceof Error ? (error as any).message : String(error)
+      const stack = error instanceof Error ? (error as any).stack : undefined
       this.logger.error(`Backfill crashed: ${message}`, stack)
     } finally {
       this.isRunning = false
     }
   }
 }
+

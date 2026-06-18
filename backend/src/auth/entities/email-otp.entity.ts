@@ -22,9 +22,10 @@ export class EmailOtp {
   @Column({ default: false })
   verified: boolean
 
-  @Column({ type: "timestamp" })
+  @Column({ type: "datetime" })
   expiresAt: Date
 
   @CreateDateColumn()
   createdAt: Date
 }
+

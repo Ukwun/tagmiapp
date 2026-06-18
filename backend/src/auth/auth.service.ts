@@ -100,7 +100,7 @@ export class AuthService {
         )
         this.logger.log(`Referral linked for user ${savedUser.id}`)
       } catch (error) {
-        this.logger.warn(`Failed to link referral for user ${savedUser.id}: ${error.message}`)
+        this.logger.warn(`Failed to link referral for user ${savedUser.id}: ${(error as any).message}`)
       }
     }
 
@@ -198,3 +198,4 @@ export class AuthService {
     return this.userRepository.findByIdOptional(id)
   }
 }
+

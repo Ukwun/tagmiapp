@@ -61,7 +61,7 @@ export class Referral {
   @Column({ nullable: true })
   userAgent: string
 
-  @Column({ type: "timestamp", nullable: true })
+  @Column({ type: "datetime", nullable: true })
   validationDeadline: Date
 
   @Column({ type: "text", nullable: true })
@@ -87,5 +87,6 @@ export class Referral {
   @OneToMany(() => ReferralValidation, (v) => v.referral)
   validations: ReferralValidation[]
 }
+
 
 

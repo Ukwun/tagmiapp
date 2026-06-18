@@ -85,7 +85,7 @@ export class TrendingService {
 
       this.logger.log(`Trending hashtags updated: ${hashtagCounts.size} hashtags`)
     } catch (error) {
-      this.logger.error("Failed to recalculate trending hashtags", error.stack)
+      this.logger.error("Failed to recalculate trending hashtags", (error as any).stack)
     }
   }
 
@@ -110,3 +110,4 @@ export class TrendingService {
     return this.hashtagStatRepository.findOne({ where: { hashtag: normalized } })
   }
 }
+
