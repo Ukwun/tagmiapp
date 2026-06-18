@@ -6,22 +6,22 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "nest build",
+    "build": "cd backend && npm install && npm run build",
+    "start": "cd backend && npm start",
+    "start:dev": "cd backend && npm run start:dev",
+    "start:debug": "cd backend && npm run start:debug",
+    "start:prod": "cd backend && npm run start:prod",
     "format": "prettier --write \"backend/src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
-    "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
     "lint": "eslint \"{backend/src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
-    "seed:content": "ts-node -r tsconfig-paths/register backend/src/seed-content.ts",
-    "seed": "ts-node -r tsconfig-paths/register backend/src/database/seed.ts",
-    "cleanup:interactions": "ts-node -r tsconfig-paths/register backend/src/database/cleanup-interactions.ts",
-    "clear:posts": "ts-node -r tsconfig-paths/register backend/src/database/clear-posts.ts"
+    "test": "cd backend && npm test",
+    "test:watch": "cd backend && npm run test:watch",
+    "test:cov": "cd backend && npm run test:cov",
+    "test:debug": "cd backend && npm run test:debug",
+    "test:e2e": "cd backend && npm run test:e2e",
+    "seed:content": "cd backend && npm run seed:content",
+    "seed": "cd backend && npm run seed",
+    "cleanup:interactions": "cd backend && npm run cleanup:interactions",
+    "clear:posts": "cd backend && npm run clear:posts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.91.1",
@@ -103,7 +103,6 @@
       "json",
       "ts"
     ],
-  "rootDir": "backend/src",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
