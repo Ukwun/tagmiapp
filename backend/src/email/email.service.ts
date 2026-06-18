@@ -8,13 +8,24 @@ import { Resend } from "resend"
 @Injectable()
 export class EmailService {
   private readonly logger = new Logger(EmailService.name)
-  private readonly resend: Resend
+  private readonly resend: Resend | null
 
   constructor(private configService: ConfigService) {
-    this.resend = new Resend(this.configService.getOrThrow("RESEND_API_KEY"))
+    const key = this.configService.get<string | undefined>("RESEND_API_KEY")
+    if (key) {
+      this.resend = new Resend(key)
+    } else {
+      this.logger.warn("RESEND_API_KEY not set — email sending is disabled")
+      this.resend = null
+    }
   }
 
   async sendVerificationCode(email: string, code: string): Promise<void> {
+    if (!this.resend) {
+      this.logger.warn(`Email send skipped: RESEND_API_KEY not configured for ${email}`)
+      throw new BadRequestException("Email service is not configured")
+    }
+
     try {
       await this.resend.emails.send({
         from: "Tagmi <noreply@tagmi.social>",
@@ -43,6 +54,11 @@ export class EmailService {
   }
 
   async sendPasswordResetCode(email: string, code: string): Promise<void> {
+    if (!this.resend) {
+      this.logger.warn(`Email send skipped: RESEND_API_KEY not configured for ${email}`)
+      throw new BadRequestException("Email service is not configured")
+    }
+
     try {
       await this.resend.emails.send({
         from: "Tagmi <noreply@tagmi.social>",
