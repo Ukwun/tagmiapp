@@ -21,11 +21,11 @@ __decorate([
     __metadata("design:type", String)
 ], CommentLike.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], CommentLike.prototype, "commentId", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], CommentLike.prototype, "userId", void 0);
 __decorate([

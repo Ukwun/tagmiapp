@@ -54,11 +54,11 @@ __decorate([
     __metadata("design:type", Number)
 ], Livestream.prototype, "currentPdfPage", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true, type: "timestamp" }),
+    (0, typeorm_1.Column)({ nullable: true, type: "datetime" }),
     __metadata("design:type", Date)
 ], Livestream.prototype, "startedAt", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true, type: "timestamp" }),
+    (0, typeorm_1.Column)({ nullable: true, type: "datetime" }),
     __metadata("design:type", Date)
 ], Livestream.prototype, "endedAt", void 0);
 __decorate([

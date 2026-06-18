@@ -20,7 +20,7 @@ __decorate([
     __metadata("design:type", String)
 ], DeviceFingerprint.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], DeviceFingerprint.prototype, "userId", void 0);
 __decorate([
@@ -36,7 +36,7 @@ __decorate([
     __metadata("design:type", String)
 ], DeviceFingerprint.prototype, "ipSubnet", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "jsonb", nullable: true }),
+    (0, typeorm_1.Column)({ type: "simple-json", nullable: true }),
     __metadata("design:type", Object)
 ], DeviceFingerprint.prototype, "components", void 0);
 __decorate([

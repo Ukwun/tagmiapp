@@ -20,7 +20,7 @@ __decorate([
     __metadata("design:type", String)
 ], UserSettings.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid", { unique: true }),
+    (0, typeorm_1.Column)({ type: "uuid", unique: true }),
     __metadata("design:type", String)
 ], UserSettings.prototype, "userId", void 0);
 __decorate([

@@ -29,7 +29,7 @@ __decorate([
     __metadata("design:type", String)
 ], WithdrawalRequest.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], WithdrawalRequest.prototype, "userId", void 0);
 __decorate([
@@ -38,7 +38,7 @@ __decorate([
 ], WithdrawalRequest.prototype, "amount", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "enum",
+        type: "simple-enum",
         enum: WithdrawalStatus,
         default: WithdrawalStatus.PENDING,
     }),
@@ -61,7 +61,7 @@ __decorate([
     __metadata("design:type", String)
 ], WithdrawalRequest.prototype, "processedBy", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "timestamp", nullable: true }),
+    (0, typeorm_1.Column)({ type: "datetime", nullable: true }),
     __metadata("design:type", Date)
 ], WithdrawalRequest.prototype, "processedAt", void 0);
 __decorate([

@@ -21,15 +21,15 @@ __decorate([
     __metadata("design:type", String)
 ], BookingMessage.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], BookingMessage.prototype, "bookingId", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], BookingMessage.prototype, "senderId", void 0);
 __decorate([
-    (0, typeorm_1.Column)("text"),
+    (0, typeorm_1.Column)({ type: "text" }),
     __metadata("design:type", String)
 ], BookingMessage.prototype, "content", void 0);
 __decorate([

@@ -14,13 +14,13 @@ export class BookingMessage {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   bookingId: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   senderId: string
 
-  @Column("text")
+  @Column({ type: "text" })
   content: string
 
   @Column({ default: false })

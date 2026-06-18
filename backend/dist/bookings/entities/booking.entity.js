@@ -20,11 +20,11 @@ __decorate([
     __metadata("design:type", String)
 ], Booking.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], Booking.prototype, "clientId", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], Booking.prototype, "talentId", void 0);
 __decorate([
@@ -33,14 +33,14 @@ __decorate([
 ], Booking.prototype, "title", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "enum",
+        type: "simple-enum",
         enum: ["pending", "accepted", "rejected", "in_progress", "completed", "cancelled", "paid"],
         default: "pending",
     }),
     __metadata("design:type", String)
 ], Booking.prototype, "status", void 0);
 __decorate([
-    (0, typeorm_1.Column)("text"),
+    (0, typeorm_1.Column)({ type: "text" }),
     __metadata("design:type", String)
 ], Booking.prototype, "description", void 0);
 __decorate([
@@ -52,7 +52,7 @@ __decorate([
     __metadata("design:type", String)
 ], Booking.prototype, "location", void 0);
 __decorate([
-    (0, typeorm_1.Column)("decimal", { precision: 10, scale: 2 }),
+    (0, typeorm_1.Column)({ type: "decimal", precision: 10, scale: 2 }),
     __metadata("design:type", Number)
 ], Booking.prototype, "price", void 0);
 __decorate([
@@ -60,11 +60,11 @@ __decorate([
     __metadata("design:type", Number)
 ], Booking.prototype, "finalAmount", void 0);
 __decorate([
-    (0, typeorm_1.Column)("timestamp"),
+    (0, typeorm_1.Column)({ type: "datetime" }),
     __metadata("design:type", Date)
 ], Booking.prototype, "startDate", void 0);
 __decorate([
-    (0, typeorm_1.Column)("timestamp", { nullable: true }),
+    (0, typeorm_1.Column)({ type: "datetime", nullable: true }),
     __metadata("design:type", Date)
 ], Booking.prototype, "endDate", void 0);
 __decorate([

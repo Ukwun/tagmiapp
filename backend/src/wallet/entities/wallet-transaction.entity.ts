@@ -28,7 +28,7 @@ export class WalletTransaction {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   walletId: string
 
   @Column({
@@ -62,5 +62,6 @@ export class WalletTransaction {
   @JoinColumn({ name: "walletId" })
   wallet: Wallet
 }
+
 
 

@@ -18,9 +18,20 @@ let EmailService = EmailService_1 = class EmailService {
     constructor(configService) {
         this.configService = configService;
         this.logger = new common_1.Logger(EmailService_1.name);
-        this.resend = new resend_1.Resend(this.configService.getOrThrow("RESEND_API_KEY"));
+        const key = this.configService.get("RESEND_API_KEY");
+        if (key) {
+            this.resend = new resend_1.Resend(key);
+        }
+        else {
+            this.logger.warn("RESEND_API_KEY not set — email sending is disabled");
+            this.resend = null;
+        }
     }
     async sendVerificationCode(email, code) {
+        if (!this.resend) {
+            this.logger.warn(`Email send skipped: RESEND_API_KEY not configured for ${email}`);
+            throw new common_1.BadRequestException("Email service is not configured");
+        }
         try {
             await this.resend.emails.send({
                 from: "Tagmi <noreply@tagmi.social>",
@@ -49,6 +60,10 @@ let EmailService = EmailService_1 = class EmailService {
         }
     }
     async sendPasswordResetCode(email, code) {
+        if (!this.resend) {
+            this.logger.warn(`Email send skipped: RESEND_API_KEY not configured for ${email}`);
+            throw new common_1.BadRequestException("Email service is not configured");
+        }
         try {
             await this.resend.emails.send({
                 from: "Tagmi <noreply@tagmi.social>",

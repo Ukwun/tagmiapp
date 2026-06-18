@@ -33,7 +33,7 @@ __decorate([
     __metadata("design:type", String)
 ], EngagementSignal.prototype, "postId", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "enum", enum: ["video", "audio", "image", "text"] }),
+    (0, typeorm_1.Column)({ type: "simple-enum", enum: ["video", "audio", "image", "text"] }),
     __metadata("design:type", String)
 ], EngagementSignal.prototype, "contentType", void 0);
 __decorate([

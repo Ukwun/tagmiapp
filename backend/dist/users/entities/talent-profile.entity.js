@@ -20,7 +20,7 @@ __decorate([
     __metadata("design:type", String)
 ], TalentProfile.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], TalentProfile.prototype, "userId", void 0);
 __decorate([
@@ -40,11 +40,11 @@ __decorate([
     __metadata("design:type", String)
 ], TalentProfile.prototype, "bio", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "json", default: [] }),
+    (0, typeorm_1.Column)({ type: "simple-json", default: [] }),
     __metadata("design:type", Array)
 ], TalentProfile.prototype, "skills", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "json", default: [] }),
+    (0, typeorm_1.Column)({ type: "simple-json", default: [] }),
     __metadata("design:type", Array)
 ], TalentProfile.prototype, "categories", void 0);
 __decorate([
@@ -56,7 +56,7 @@ __decorate([
     __metadata("design:type", String)
 ], TalentProfile.prototype, "location", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "json", default: [] }),
+    (0, typeorm_1.Column)({ type: "simple-json", default: [] }),
     __metadata("design:type", Array)
 ], TalentProfile.prototype, "languages", void 0);
 __decorate([
@@ -64,11 +64,11 @@ __decorate([
     __metadata("design:type", String)
 ], TalentProfile.prototype, "portfolioUrl", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "json", default: {} }),
+    (0, typeorm_1.Column)({ type: "simple-json", default: {} }),
     __metadata("design:type", Object)
 ], TalentProfile.prototype, "socialLinks", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "json", default: [] }),
+    (0, typeorm_1.Column)({ type: "simple-json", default: [] }),
     __metadata("design:type", Array)
 ], TalentProfile.prototype, "services", void 0);
 __decorate([
@@ -85,7 +85,7 @@ __decorate([
 ], TalentProfile.prototype, "responseTime", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "enum",
+        type: "simple-enum",
         enum: ["available", "busy", "unavailable"],
         default: "available",
     }),

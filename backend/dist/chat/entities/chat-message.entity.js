@@ -21,15 +21,15 @@ __decorate([
     __metadata("design:type", String)
 ], ChatMessage.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], ChatMessage.prototype, "roomId", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], ChatMessage.prototype, "senderId", void 0);
 __decorate([
-    (0, typeorm_1.Column)("text"),
+    (0, typeorm_1.Column)({ type: "text" }),
     __metadata("design:type", String)
 ], ChatMessage.prototype, "content", void 0);
 __decorate([
@@ -57,7 +57,7 @@ __decorate([
     __metadata("design:type", Boolean)
 ], ChatMessage.prototype, "isEdited", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "timestamp", nullable: true }),
+    (0, typeorm_1.Column)({ type: "datetime", nullable: true }),
     __metadata("design:type", Date)
 ], ChatMessage.prototype, "editedAt", void 0);
 __decorate([
@@ -65,7 +65,7 @@ __decorate([
     __metadata("design:type", Boolean)
 ], ChatMessage.prototype, "isDeleted", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "timestamp", nullable: true }),
+    (0, typeorm_1.Column)({ type: "datetime", nullable: true }),
     __metadata("design:type", Date)
 ], ChatMessage.prototype, "deletedAt", void 0);
 __decorate([

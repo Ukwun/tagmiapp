@@ -19,11 +19,11 @@ __decorate([
     __metadata("design:type", String)
 ], ContentEmbedding.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid", { unique: true }),
+    (0, typeorm_1.Column)({ type: "uuid", unique: true }),
     __metadata("design:type", String)
 ], ContentEmbedding.prototype, "contentId", void 0);
 __decorate([
-    (0, typeorm_1.Column)("text"),
+    (0, typeorm_1.Column)({ type: "text" }),
     __metadata("design:type", String)
 ], ContentEmbedding.prototype, "embedding", void 0);
 __decorate([

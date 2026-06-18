@@ -14,13 +14,13 @@ export class ChatMessage {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   roomId: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   senderId: string
 
-  @Column("text")
+  @Column({ type: "text" })
   content: string
 
   @Column({ nullable: true })
@@ -65,3 +65,4 @@ export class ChatMessage {
   @JoinColumn({ name: "replyToId" })
   replyTo: ChatMessage
 }
+

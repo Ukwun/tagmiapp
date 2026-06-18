@@ -16,10 +16,10 @@ export class CommentLike {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   commentId: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   userId: string
 
   @CreateDateColumn()

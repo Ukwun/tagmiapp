@@ -13,7 +13,7 @@ export class PhoneVerification {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   userId: string
 
   @Column()
@@ -34,4 +34,5 @@ export class PhoneVerification {
   @CreateDateColumn()
   createdAt: Date
 }
+
 

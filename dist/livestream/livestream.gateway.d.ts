@@ -45,6 +45,12 @@ export declare class LivestreamGateway implements OnGatewayConnection, OnGateway
         requesterId: string;
         username?: string;
     }): void;
+    handleDeclineJoin(client: Socket, data: {
+        roomId: string;
+        requesterId: string;
+        username?: string;
+        reason?: string;
+    }): void;
     handleAnswer(client: Socket, data: {
         roomId: string;
         answer: any;

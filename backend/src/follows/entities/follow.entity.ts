@@ -17,10 +17,10 @@ export class Follow {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   followerId: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   followingId: string
 
   @CreateDateColumn()

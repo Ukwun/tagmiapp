@@ -20,11 +20,11 @@ __decorate([
     __metadata("design:type", String)
 ], Follow.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], Follow.prototype, "followerId", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], Follow.prototype, "followingId", void 0);
 __decorate([

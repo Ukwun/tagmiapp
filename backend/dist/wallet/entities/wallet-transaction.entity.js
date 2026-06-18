@@ -32,12 +32,12 @@ __decorate([
     __metadata("design:type", String)
 ], WalletTransaction.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], WalletTransaction.prototype, "walletId", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "enum",
+        type: "simple-enum",
         enum: TransactionType,
     }),
     __metadata("design:type", String)
@@ -63,7 +63,7 @@ __decorate([
     __metadata("design:type", String)
 ], WalletTransaction.prototype, "ip", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "jsonb", nullable: true }),
+    (0, typeorm_1.Column)({ type: "simple-json", nullable: true }),
     __metadata("design:type", Object)
 ], WalletTransaction.prototype, "metadata", void 0);
 __decorate([

@@ -30,7 +30,7 @@ export class Draft {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   userId: string
 
   @ManyToOne(() => User, { onDelete: "CASCADE" })
@@ -52,4 +52,5 @@ export class Draft {
   @UpdateDateColumn()
   updatedAt: Date
 }
+
 

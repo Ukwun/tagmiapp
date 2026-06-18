@@ -36,7 +36,7 @@ __decorate([
 ], LivestreamParticipant.prototype, "userId", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "enum",
+        type: "simple-enum",
         enum: LivestreamRole,
         default: LivestreamRole.PARTICIPANT,
     }),

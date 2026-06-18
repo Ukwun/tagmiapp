@@ -35,7 +35,7 @@ __decorate([
 ], ReferralValidation.prototype, "referralId", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "enum",
+        type: "simple-enum",
         enum: ValidationCheckpoint,
     }),
     __metadata("design:type", String)
@@ -45,7 +45,7 @@ __decorate([
     __metadata("design:type", Boolean)
 ], ReferralValidation.prototype, "passed", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "jsonb", nullable: true }),
+    (0, typeorm_1.Column)({ type: "simple-json", nullable: true }),
     __metadata("design:type", Object)
 ], ReferralValidation.prototype, "evidence", void 0);
 __decorate([

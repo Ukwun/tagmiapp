@@ -22,11 +22,11 @@ __decorate([
     __metadata("design:type", String)
 ], Content.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], Content.prototype, "userId", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "enum", enum: ["text", "image", "video", "audio"] }),
+    (0, typeorm_1.Column)({ type: "simple-enum", enum: ["text", "image", "video", "audio"] }),
     __metadata("design:type", String)
 ], Content.prototype, "contentType", void 0);
 __decorate([
@@ -142,7 +142,7 @@ __decorate([
     __metadata("design:type", String)
 ], Content.prototype, "aiDescription", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "jsonb", nullable: true, default: null }),
+    (0, typeorm_1.Column)({ type: "simple-json", nullable: true, default: null }),
     __metadata("design:type", Array)
 ], Content.prototype, "categories", void 0);
 __decorate([
@@ -150,7 +150,7 @@ __decorate([
     __metadata("design:type", Boolean)
 ], Content.prototype, "isActive", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "timestamp", nullable: true }),
+    (0, typeorm_1.Column)({ type: "datetime", nullable: true }),
     __metadata("design:type", Date)
 ], Content.prototype, "scheduledAt", void 0);
 __decorate([

@@ -17,7 +17,7 @@ export class UserSettings {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column("uuid", { unique: true })
+  @Column({ type: "uuid", unique: true })
   userId: string
 
   // Notification settings
@@ -60,3 +60,4 @@ export class UserSettings {
   @JoinColumn({ name: "userId" })
   user: User
 }
+

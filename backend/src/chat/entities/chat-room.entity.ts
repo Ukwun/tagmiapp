@@ -22,7 +22,7 @@ export class ChatRoom {
   @Column({ type: "simple-enum", enum: ["direct", "group", "booking"], default: "direct" })
   type: "direct" | "group" | "booking"
 
-  @Column("uuid", { nullable: true })
+  @Column({ type: "uuid", nullable: true })
   bookingId: string | null
 
   @CreateDateColumn()
@@ -50,3 +50,4 @@ export class ChatRoom {
   // Number of messages the current user has not read yet in this room.
   unreadCount?: number
 }
+

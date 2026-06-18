@@ -26,7 +26,7 @@ export class WithdrawalRequest {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   userId: string
 
   @Column({ type: "decimal", precision: 10, scale: 2 })
@@ -64,5 +64,6 @@ export class WithdrawalRequest {
   @JoinColumn({ name: "userId" })
   user: User
 }
+
 
 

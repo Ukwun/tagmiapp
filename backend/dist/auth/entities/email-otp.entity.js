@@ -31,7 +31,7 @@ __decorate([
     __metadata("design:type", Boolean)
 ], EmailOtp.prototype, "verified", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "timestamp" }),
+    (0, typeorm_1.Column)({ type: "datetime" }),
     __metadata("design:type", Date)
 ], EmailOtp.prototype, "expiresAt", void 0);
 __decorate([

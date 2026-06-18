@@ -36,7 +36,7 @@ __decorate([
 ], LivestreamParticipant.prototype, "userId", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "enum",
+        type: "simple-enum",
         enum: LivestreamRole,
         default: LivestreamRole.PARTICIPANT,
     }),
@@ -47,11 +47,11 @@ __decorate([
     __metadata("design:type", Date)
 ], LivestreamParticipant.prototype, "joinedAt", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true, type: "timestamp" }),
+    (0, typeorm_1.Column)({ nullable: true, type: "datetime" }),
     __metadata("design:type", Date)
 ], LivestreamParticipant.prototype, "leftAt", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" }),
+    (0, typeorm_1.Column)({ type: "datetime", default: () => "CURRENT_TIMESTAMP" }),
     __metadata("design:type", Date)
 ], LivestreamParticipant.prototype, "lastActiveAt", void 0);
 __decorate([

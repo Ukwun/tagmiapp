@@ -17,7 +17,7 @@ export class ClientProfile {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   userId: string
 
   @Column({ nullable: true })
@@ -63,4 +63,5 @@ export class ClientProfile {
   @JoinColumn({ name: "userId" })
   user: User
 }
+
 

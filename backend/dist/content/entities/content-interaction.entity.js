@@ -21,15 +21,15 @@ __decorate([
     __metadata("design:type", String)
 ], ContentInteraction.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], ContentInteraction.prototype, "userId", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], ContentInteraction.prototype, "contentId", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "enum", enum: ["like", "view", "share", "comment", "bookmark"] }),
+    (0, typeorm_1.Column)({ type: "simple-enum", enum: ["like", "view", "share", "comment", "bookmark"] }),
     __metadata("design:type", String)
 ], ContentInteraction.prototype, "type", void 0);
 __decorate([

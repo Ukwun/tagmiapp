@@ -30,7 +30,7 @@ export class Referral {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   referrerId: string
 
   @Column({ type: "uuid", nullable: true })
@@ -87,6 +87,7 @@ export class Referral {
   @OneToMany(() => ReferralValidation, (v) => v.referral)
   validations: ReferralValidation[]
 }
+
 
 
 

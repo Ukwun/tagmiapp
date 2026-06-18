@@ -29,7 +29,7 @@ __decorate([
     __metadata("design:type", String)
 ], ContentInteraction.prototype, "contentId", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "enum", enum: ["like", "view", "share", "comment", "bookmark"] }),
+    (0, typeorm_1.Column)({ type: "simple-enum", enum: ["like", "view", "share", "comment", "bookmark"] }),
     __metadata("design:type", String)
 ], ContentInteraction.prototype, "type", void 0);
 __decorate([

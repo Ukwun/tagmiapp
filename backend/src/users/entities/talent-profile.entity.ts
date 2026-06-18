@@ -17,7 +17,7 @@ export class TalentProfile {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   userId: string
 
   @Column({ nullable: true })
@@ -94,5 +94,6 @@ export class TalentProfile {
   @JoinColumn({ name: "userId" })
   user: User
 }
+
 
 

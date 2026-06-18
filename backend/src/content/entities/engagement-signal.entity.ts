@@ -17,10 +17,10 @@ export class EngagementSignal {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   userId: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   contentId: string
 
   @Column()
@@ -58,4 +58,5 @@ export class EngagementSignal {
   @JoinColumn({ name: "contentId" })
   content: Content
 }
+
 

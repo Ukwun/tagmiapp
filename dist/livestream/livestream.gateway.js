@@ -37,6 +37,14 @@ let LivestreamGateway = class LivestreamGateway {
             else {
                 this.roomUsers.delete(roomId);
             }
+            const pending = this.pendingJoinRequests.get(roomId) || [];
+            const pendingFiltered = pending.filter((req) => req.socketId !== client.id);
+            if (pendingFiltered.length > 0) {
+                this.pendingJoinRequests.set(roomId, pendingFiltered);
+            }
+            else {
+                this.pendingJoinRequests.delete(roomId);
+            }
             this.userRooms.delete(client.id);
             this.server.to(roomId).emit('userLeft', {
                 socketId: client.id,
@@ -113,6 +121,14 @@ let LivestreamGateway = class LivestreamGateway {
             this.roomUsers.delete(roomId);
         }
         this.userRooms.delete(client.id);
+        const pending = this.pendingJoinRequests.get(roomId) || [];
+        const pendingFiltered = pending.filter((req) => req.socketId !== client.id);
+        if (pendingFiltered.length > 0) {
+            this.pendingJoinRequests.set(roomId, pendingFiltered);
+        }
+        else {
+            this.pendingJoinRequests.delete(roomId);
+        }
         console.log(`[Socket] User left room ${roomId}`);
         this.server.to(roomId).emit('userLeft', {
             socketId: client.id,
@@ -133,6 +149,13 @@ let LivestreamGateway = class LivestreamGateway {
             timestamp: Date.now(),
         };
         const existing = this.pendingJoinRequests.get(roomId) || [];
+        if (existing.some((req) => req.socketId === client.id)) {
+            client.emit('joinRequestFailed', {
+                roomId,
+                reason: 'You already have a pending join request.',
+            });
+            return;
+        }
         this.pendingJoinRequests.set(roomId, [...existing, request]);
         if (hosts.length === 0) {
             client.emit('joinRequestFailed', {
@@ -167,6 +190,24 @@ let LivestreamGateway = class LivestreamGateway {
             timestamp: Date.now(),
         });
         console.log(`[Socket] Join approved for ${username} in room ${roomId}`);
+    }
+    handleDeclineJoin(client, data) {
+        const { roomId, requesterId, username = 'Guest', reason = 'Host declined your request.' } = data;
+        const roomUsers = this.roomUsers.get(roomId) || [];
+        const host = roomUsers.find((user) => user.socketId === client.id && user.role === 'host');
+        if (!host) {
+            console.warn(`[Socket] Unauthorized declineJoin from ${client.id}`);
+            return;
+        }
+        const pending = this.pendingJoinRequests.get(roomId) || [];
+        this.pendingJoinRequests.set(roomId, pending.filter((req) => req.socketId !== requesterId));
+        this.server.to(requesterId).emit('joinDeclined', {
+            roomId,
+            requesterId,
+            username,
+            reason,
+        });
+        console.log(`[Socket] Join declined for ${username} in room ${roomId}`);
     }
     handleAnswer(client, data) {
         this.server.to(data.to).emit('answer', data);
@@ -244,6 +285,14 @@ __decorate([
     __metadata("design:paramtypes", [socket_io_1.Socket, Object]),
     __metadata("design:returntype", void 0)
 ], LivestreamGateway.prototype, "handleApproveJoin", null);
+__decorate([
+    (0, websockets_1.SubscribeMessage)('declineJoin'),
+    __param(0, (0, websockets_1.ConnectedSocket)()),
+    __param(1, (0, websockets_1.MessageBody)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [socket_io_1.Socket, Object]),
+    __metadata("design:returntype", void 0)
+], LivestreamGateway.prototype, "handleDeclineJoin", null);
 __decorate([
     (0, websockets_1.SubscribeMessage)('answer'),
     __param(0, (0, websockets_1.ConnectedSocket)()),

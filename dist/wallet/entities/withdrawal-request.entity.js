@@ -38,7 +38,7 @@ __decorate([
 ], WithdrawalRequest.prototype, "amount", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "enum",
+        type: "simple-enum",
         enum: WithdrawalStatus,
         default: WithdrawalStatus.PENDING,
     }),

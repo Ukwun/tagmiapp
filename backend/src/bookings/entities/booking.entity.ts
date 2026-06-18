@@ -14,10 +14,10 @@ export class Booking {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   clientId: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   talentId: string
 
   @Column()
@@ -30,7 +30,7 @@ export class Booking {
   })
   status: "pending" | "accepted" | "rejected" | "in_progress" | "completed" | "cancelled" | "paid"
 
-  @Column("text")
+  @Column({ type: "text" })
   description: string
 
   @Column({ nullable: true })
@@ -39,7 +39,7 @@ export class Booking {
   @Column({ nullable: true })
   location: string
 
-  @Column("decimal", { precision: 10, scale: 2 })
+  @Column({ type: "decimal",  precision: 10, scale: 2 })
   price: number
 
   @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
@@ -65,3 +65,5 @@ export class Booking {
   @JoinColumn({ name: "talentId" })
   talent: User
 }
+
+

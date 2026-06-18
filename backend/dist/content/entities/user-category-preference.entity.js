@@ -41,7 +41,7 @@ __decorate([
     __metadata("design:type", Number)
 ], UserCategoryPreference.prototype, "engagementCount", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "timestamptz", nullable: true, name: "last_engagement_at" }),
+    (0, typeorm_1.Column)({ type: "datetime", nullable: true, name: "last_engagement_at" }),
     __metadata("design:type", Date)
 ], UserCategoryPreference.prototype, "lastEngagementAt", void 0);
 __decorate([

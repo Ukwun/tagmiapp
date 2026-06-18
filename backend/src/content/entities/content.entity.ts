@@ -17,7 +17,7 @@ export class Content {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   userId: string
 
   @Column({ type: "simple-enum", enum: ["text", "image", "video", "audio"] })
@@ -168,6 +168,7 @@ export class Content {
   )
   contentComments: Comment[]
 }
+
 
 
 

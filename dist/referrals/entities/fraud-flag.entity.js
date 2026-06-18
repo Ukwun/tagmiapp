@@ -57,14 +57,14 @@ __decorate([
 ], FraudFlag.prototype, "referralId", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "enum",
+        type: "simple-enum",
         enum: FraudFlagType,
     }),
     __metadata("design:type", String)
 ], FraudFlag.prototype, "type", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "enum",
+        type: "simple-enum",
         enum: FraudFlagSeverity,
         default: FraudFlagSeverity.MEDIUM,
     }),
@@ -72,7 +72,7 @@ __decorate([
 ], FraudFlag.prototype, "severity", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "enum",
+        type: "simple-enum",
         enum: FraudFlagStatus,
         default: FraudFlagStatus.OPEN,
     }),
@@ -83,7 +83,7 @@ __decorate([
     __metadata("design:type", String)
 ], FraudFlag.prototype, "description", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "jsonb", nullable: true }),
+    (0, typeorm_1.Column)({ type: "simple-json", nullable: true }),
     __metadata("design:type", Object)
 ], FraudFlag.prototype, "evidence", void 0);
 __decorate([

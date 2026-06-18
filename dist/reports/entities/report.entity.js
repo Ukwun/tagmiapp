@@ -54,14 +54,14 @@ __decorate([
 ], Report.prototype, "reporter", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "enum",
+        type: "simple-enum",
         enum: ReportType,
     }),
     __metadata("design:type", String)
 ], Report.prototype, "type", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "enum",
+        type: "simple-enum",
         enum: ReportReason,
     }),
     __metadata("design:type", String)
@@ -84,7 +84,7 @@ __decorate([
 ], Report.prototype, "targetCommentId", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "enum",
+        type: "simple-enum",
         enum: ReportStatus,
         default: ReportStatus.PENDING,
     }),

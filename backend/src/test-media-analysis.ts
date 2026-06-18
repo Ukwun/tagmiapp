@@ -84,7 +84,7 @@ async function main() {
       successCount++
     } catch (err: unknown) {
       if (err instanceof Error) {
-        console.error(`\nFAILED: ${err.message}`, err.stack);
+        console.error(`\nFAILED: ${(err as any).message}`, (err as any).stack);
       } else {
         console.error(`\nFAILED: ${String(err)}`);
       }
@@ -103,3 +103,4 @@ main().catch(err => {
   console.error("Test failed:", err)
   process.exit(1)
 })
+

@@ -48,7 +48,7 @@ __decorate([
 ], Notification.prototype, "actor", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "enum",
+        type: "simple-enum",
         enum: NotificationType,
     }),
     __metadata("design:type", String)

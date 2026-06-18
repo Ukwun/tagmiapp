@@ -5,12 +5,13 @@ export class ContentEmbedding {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column("uuid", { unique: true })
+  @Column({ type: "uuid", unique: true })
   contentId: string
 
-  @Column("text")
+  @Column({ type: "text" })
   embedding: string // Stored as JSON array string, parsed to float[] at runtime
 
   @CreateDateColumn()
   createdAt: Date
 }
+

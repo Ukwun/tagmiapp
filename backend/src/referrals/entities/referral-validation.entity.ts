@@ -24,7 +24,7 @@ export class ReferralValidation {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   referralId: string
 
   @Column({
@@ -46,5 +46,6 @@ export class ReferralValidation {
   @JoinColumn({ name: "referralId" })
   referral: Referral
 }
+
 
 

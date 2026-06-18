@@ -19,7 +19,7 @@ __decorate([
     __metadata("design:type", String)
 ], PhoneVerification.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], PhoneVerification.prototype, "userId", void 0);
 __decorate([
@@ -35,7 +35,7 @@ __decorate([
     __metadata("design:type", String)
 ], PhoneVerification.prototype, "otpHash", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "timestamp", nullable: true }),
+    (0, typeorm_1.Column)({ type: "datetime", nullable: true }),
     __metadata("design:type", Date)
 ], PhoneVerification.prototype, "otpExpiresAt", void 0);
 __decorate([

@@ -7,10 +7,10 @@ export class ContentInteraction {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   userId: string
 
-  @Column("uuid")
+  @Column({ type: "uuid" })
   contentId: string
 
   @Column({ type: "simple-enum", enum: ["like", "view", "share", "comment", "bookmark"] })
@@ -31,4 +31,5 @@ export class ContentInteraction {
   @JoinColumn({ name: "contentId" })
   content: Content
 }
+
 

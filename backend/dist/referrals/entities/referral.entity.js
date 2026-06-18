@@ -31,7 +31,7 @@ __decorate([
     __metadata("design:type", String)
 ], Referral.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)("uuid"),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], Referral.prototype, "referrerId", void 0);
 __decorate([
@@ -44,7 +44,7 @@ __decorate([
 ], Referral.prototype, "referralCode", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "enum",
+        type: "simple-enum",
         enum: ReferralStatus,
         default: ReferralStatus.CLICKED,
     }),
@@ -71,7 +71,7 @@ __decorate([
     __metadata("design:type", String)
 ], Referral.prototype, "userAgent", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "timestamp", nullable: true }),
+    (0, typeorm_1.Column)({ type: "datetime", nullable: true }),
     __metadata("design:type", Date)
 ], Referral.prototype, "validationDeadline", void 0);
 __decorate([
@@ -79,7 +79,7 @@ __decorate([
     __metadata("design:type", String)
 ], Referral.prototype, "rejectionReason", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "jsonb", nullable: true }),
+    (0, typeorm_1.Column)({ type: "simple-json", nullable: true }),
     __metadata("design:type", Object)
 ], Referral.prototype, "metadata", void 0);
 __decorate([

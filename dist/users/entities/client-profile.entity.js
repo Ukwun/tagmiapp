@@ -44,11 +44,11 @@ __decorate([
     __metadata("design:type", String)
 ], ClientProfile.prototype, "website", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "json", default: [] }),
+    (0, typeorm_1.Column)({ type: "simple-json", default: [] }),
     __metadata("design:type", Array)
 ], ClientProfile.prototype, "preferredCategories", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "json", default: [] }),
+    (0, typeorm_1.Column)({ type: "simple-json", default: [] }),
     __metadata("design:type", Array)
 ], ClientProfile.prototype, "preferredSkills", void 0);
 __decorate([

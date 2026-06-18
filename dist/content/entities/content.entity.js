@@ -26,7 +26,7 @@ __decorate([
     __metadata("design:type", String)
 ], Content.prototype, "userId", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "enum", enum: ["text", "image", "video", "audio"] }),
+    (0, typeorm_1.Column)({ type: "simple-enum", enum: ["text", "image", "video", "audio"] }),
     __metadata("design:type", String)
 ], Content.prototype, "contentType", void 0);
 __decorate([
@@ -142,7 +142,7 @@ __decorate([
     __metadata("design:type", String)
 ], Content.prototype, "aiDescription", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "jsonb", nullable: true, default: null }),
+    (0, typeorm_1.Column)({ type: "simple-json", nullable: true, default: null }),
     __metadata("design:type", Array)
 ], Content.prototype, "categories", void 0);
 __decorate([
