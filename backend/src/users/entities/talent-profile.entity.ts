@@ -32,10 +32,10 @@ export class TalentProfile {
   @Column({ type: "text", nullable: true })
   bio: string
 
-  @Column({ type: "json", default: [] })
+  @Column({ type: "simple-json", default: [] })
   skills: string[]
 
-  @Column({ type: "json", default: [] })
+  @Column({ type: "simple-json", default: [] })
   categories: string[]
 
   @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
@@ -44,16 +44,16 @@ export class TalentProfile {
   @Column({ nullable: true })
   location: string
 
-  @Column({ type: "json", default: [] })
+  @Column({ type: "simple-json", default: [] })
   languages: string[]
 
   @Column({ nullable: true })
   portfolioUrl: string
 
-  @Column({ type: "json", default: {} })
+  @Column({ type: "simple-json", default: {} })
   socialLinks: Record<string, string>
 
-  @Column({ type: "json", default: [] })
+  @Column({ type: "simple-json", default: [] })
   services: { name: string; description: string; price: number }[]
 
   @Column({ type: "decimal", precision: 3, scale: 2, default: 0 })
@@ -94,4 +94,5 @@ export class TalentProfile {
   @JoinColumn({ name: "userId" })
   user: User
 }
+
 

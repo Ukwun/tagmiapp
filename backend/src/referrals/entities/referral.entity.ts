@@ -67,7 +67,7 @@ export class Referral {
   @Column({ type: "text", nullable: true })
   rejectionReason: string
 
-  @Column({ type: "jsonb", nullable: true })
+  @Column({ type: "simple-json", nullable: true })
   metadata: Record<string, any>
 
   @CreateDateColumn()
@@ -87,4 +87,5 @@ export class Referral {
   @OneToMany(() => ReferralValidation, (v) => v.referral)
   validations: ReferralValidation[]
 }
+
 

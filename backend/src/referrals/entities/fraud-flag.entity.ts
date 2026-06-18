@@ -74,7 +74,7 @@ export class FraudFlag {
   @Column({ type: "text" })
   description: string
 
-  @Column({ type: "jsonb", nullable: true })
+  @Column({ type: "simple-json", nullable: true })
   evidence: Record<string, any>
 
   @Column({ type: "text", nullable: true })
@@ -91,4 +91,5 @@ export class FraudFlag {
   @JoinColumn({ name: "referralId" })
   referral: Referral
 }
+
 

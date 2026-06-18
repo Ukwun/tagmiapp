@@ -37,7 +37,7 @@ export class Draft {
   @JoinColumn({ name: "userId" })
   user: User
 
-  @Column({ type: "jsonb" })
+  @Column({ type: "simple-json" })
   slides: DraftSlide[]
 
   @Column({ type: "simple-array", nullable: true })
@@ -52,3 +52,4 @@ export class Draft {
   @UpdateDateColumn()
   updatedAt: Date
 }
+

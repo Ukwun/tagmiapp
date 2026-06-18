@@ -36,7 +36,7 @@ export class ReferralValidation {
   @Column({ default: false })
   passed: boolean
 
-  @Column({ type: "jsonb", nullable: true })
+  @Column({ type: "simple-json", nullable: true })
   evidence: Record<string, any>
 
   @CreateDateColumn()
@@ -46,4 +46,5 @@ export class ReferralValidation {
   @JoinColumn({ name: "referralId" })
   referral: Referral
 }
+
 

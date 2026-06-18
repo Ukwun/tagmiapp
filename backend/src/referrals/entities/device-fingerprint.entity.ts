@@ -28,7 +28,7 @@ export class DeviceFingerprint {
   @Column({ nullable: true })
   ipSubnet: string
 
-  @Column({ type: "jsonb", nullable: true })
+  @Column({ type: "simple-json", nullable: true })
   components: Record<string, any>
 
   @Column({ nullable: true })
@@ -59,3 +59,4 @@ export class DeviceFingerprint {
   @JoinColumn({ name: "userId" })
   user: User
 }
+

@@ -52,7 +52,7 @@ export class WalletTransaction {
   @Column({ nullable: true })
   ip: string
 
-  @Column({ type: "jsonb", nullable: true })
+  @Column({ type: "simple-json", nullable: true })
   metadata: Record<string, any>
 
   @CreateDateColumn()
@@ -62,4 +62,5 @@ export class WalletTransaction {
   @JoinColumn({ name: "walletId" })
   wallet: Wallet
 }
+
 

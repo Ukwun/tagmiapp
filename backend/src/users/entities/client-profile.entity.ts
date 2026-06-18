@@ -35,10 +35,10 @@ export class ClientProfile {
   @Column({ nullable: true })
   website: string
 
-  @Column({ type: "json", default: [] })
+  @Column({ type: "simple-json", default: [] })
   preferredCategories: string[] // Talent categories they're interested in
 
-  @Column({ type: "json", default: [] })
+  @Column({ type: "simple-json", default: [] })
   preferredSkills: string[] // Skills they frequently look for
 
   @Column({ default: 0 })
@@ -63,3 +63,4 @@ export class ClientProfile {
   @JoinColumn({ name: "userId" })
   user: User
 }
+

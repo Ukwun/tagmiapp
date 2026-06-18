@@ -118,7 +118,7 @@ export class Content {
 
   // AI-assigned categories with confidence scores (from categorization service)
   // Only set on the first slide (sortOrder 0) of each post.
-  @Column({ type: "jsonb", nullable: true, default: null })
+  @Column({ type: "simple-json", nullable: true, default: null })
   categories: { category: string; confidence: number }[] | null
 
   @Column({ default: true })
@@ -168,4 +168,5 @@ export class Content {
   )
   contentComments: Comment[]
 }
+
 
