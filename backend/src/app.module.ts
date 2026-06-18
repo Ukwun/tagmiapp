@@ -19,6 +19,50 @@ import { LivestreamModule } from "./livestream/livestream.module"
 import { RedisModule } from "./config/redis.module"
 import { CommonModule } from "./common/common.module"
 
+const getDatabaseConfig = () => {
+  const databaseUrl = process.env.DATABASE_URL || process.env.DB_URL
+  const host = process.env.DB_HOST
+  const port = Number.parseInt(process.env.DB_PORT || "5432")
+  const username = process.env.DB_USERNAME || "postgres"
+  const password = process.env.DB_PASSWORD || ""
+  const database = process.env.DB_DATABASE || "hashtag_db"
+
+  if (databaseUrl || host) {
+    return {
+      type: "postgres" as const,
+      ...(databaseUrl
+        ? { url: databaseUrl }
+        : {
+            host,
+            port,
+            username,
+            password,
+            database,
+          }),
+      autoLoadEntities: true,
+      synchronize: false,
+      migrations: ["dist/**/migrations/*.js"],
+      migrationsRun: true,
+      ...((host && host !== "localhost" && host !== "127.0.0.1") && {
+        ssl: { rejectUnauthorized: false },
+      }),
+    }
+  }
+
+  console.warn(
+    "No database environment variables found. Falling back to SQLite for deployment."
+  )
+
+  return {
+    type: "sqlite" as const,
+    database: process.env.SQLITE_DB_PATH || "data/sqlite.db",
+    autoLoadEntities: true,
+    synchronize: true,
+    migrations: ["dist/**/migrations/*.js"],
+    migrationsRun: false,
+  }
+}
+
 @Module({
 imports: [
 ConfigModule.forRoot({
@@ -30,23 +74,7 @@ ttl: 60000,
 limit: 10,
 },
 ]),
-TypeOrmModule.forRoot({
-type: "postgres",
-host: process.env.DB_HOST || "localhost",
-port: Number.parseInt(process.env.DB_PORT || "5432"),
-username: process.env.DB_USERNAME || "postgres",
-password: process.env.DB_PASSWORD || "",
-database: process.env.DB_DATABASE || "hashtag_db",
-autoLoadEntities: true,
-synchronize: false,
-migrations: ["dist/**/migrations/*.js"],
-migrationsRun: true,
-...((process.env.DB_HOST &&
-process.env.DB_HOST !== "localhost" &&
-process.env.DB_HOST !== "127.0.0.1") && {
-ssl: { rejectUnauthorized: false },
-}),
-}),
+TypeOrmModule.forRoot(getDatabaseConfig()),
 ScheduleModule.forRoot(),
 RedisModule,
 CommonModule,
