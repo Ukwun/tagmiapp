@@ -45,10 +45,10 @@ export class Booking {
   @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
   finalAmount: number // Amount after negotiation
 
-  @Column("timestamp")
+  @Column({ type: "datetime" })
   startDate: Date
 
-  @Column("timestamp", { nullable: true })
+  @Column({ type: "datetime", nullable: true })
   endDate: Date
 
   @CreateDateColumn()
