@@ -17,6 +17,7 @@
     "esModuleInterop": true,
     "incremental": true,
     "skipLibCheck": true,
+    "useUnknownInCatchVariables": false,
     "strict": true,
     "noImplicitAny": false,
     "strictNullChecks": false,
