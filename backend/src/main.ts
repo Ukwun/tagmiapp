@@ -1,3 +1,4 @@
+import "reflect-metadata";
 // SECURITY: Only disable TLS verification in local development
 // Production should ALWAYS verify SSL certificates
 if (process.env.NODE_ENV === "development") {

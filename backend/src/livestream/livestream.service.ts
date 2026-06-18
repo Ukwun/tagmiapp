@@ -136,11 +136,25 @@ export class LivestreamService {
     at.addGrant({
       roomJoin: true,
       room: stream.roomName,
-      canPublish: stream.hostId === userId, 
+      canPublish: stream.hostId === userId,
       canSubscribe: true,
     });
 
     return at.toJwt();
+  }
+
+  async getActiveStreams(): Promise<Array<Livestream & { viewers: number }>> {
+    const streams = await this.livestreamRepository.find({ where: { status: 'live' } });
+
+    return Promise.all(
+      streams.map(async (stream) => {
+        const viewers = await this.participantRepository.count({ where: { livestreamId: stream.id } });
+        return {
+          ...stream,
+          viewers,
+        };
+      }),
+    );
   }
 
   /**

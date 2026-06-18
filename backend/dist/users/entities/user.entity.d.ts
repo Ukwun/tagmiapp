@@ -1,0 +1,31 @@
+import { Content } from "../../content/entities/content.entity";
+import { TalentProfile } from "./talent-profile.entity";
+export declare class User {
+    id: string;
+    email: string;
+    username: string;
+    displayName: string;
+    passwordHash: string;
+    role: "talent" | "client" | "manager";
+    lastLogin: Date;
+    avatarUrl: string;
+    coverImageUrl: string;
+    bio: string;
+    gender: string;
+    dateOfBirth: Date;
+    location: string;
+    interests: string[];
+    followersCount: number;
+    followingCount: number;
+    postCount: number;
+    isVerified: boolean;
+    isActive: boolean;
+    referredBy: string;
+    phoneHash: string;
+    validReferralCount: number;
+    referralLevel: number;
+    createdAt: Date;
+    updatedAt: Date;
+    content: Content[];
+    talentProfile: TalentProfile;
+}

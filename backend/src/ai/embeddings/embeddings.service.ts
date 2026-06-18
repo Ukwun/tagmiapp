@@ -61,7 +61,8 @@ export class EmbeddingsService implements OnModuleInit {
       const output = await this.pipeline(text, { pooling: "mean", normalize: true })
       return Array.from(output.data)
     } catch (error) {
-      this.logger.error("Failed to generate embedding", error.message)
+      const message = error instanceof Error ? error.message : String(error)
+      this.logger.error("Failed to generate embedding", message)
       return null
     }
   }
