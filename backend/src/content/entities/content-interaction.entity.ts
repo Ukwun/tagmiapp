@@ -13,7 +13,7 @@ export class ContentInteraction {
   @Column("uuid")
   contentId: string
 
-  @Column({ type: "enum", enum: ["like", "view", "share", "comment", "bookmark"] })
+  @Column({ type: "simple-enum", enum: ["like", "view", "share", "comment", "bookmark"] })
   type: "like" | "view" | "share" | "comment" | "bookmark"
 
   @CreateDateColumn()
@@ -31,3 +31,4 @@ export class ContentInteraction {
   @JoinColumn({ name: "contentId" })
   content: Content
 }
+

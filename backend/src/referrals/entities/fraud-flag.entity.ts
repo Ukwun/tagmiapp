@@ -52,20 +52,20 @@ export class FraudFlag {
   referralId: string
 
   @Column({
-    type: "enum",
+    type: "simple-enum",
     enum: FraudFlagType,
   })
   type: FraudFlagType
 
   @Column({
-    type: "enum",
+    type: "simple-enum",
     enum: FraudFlagSeverity,
     default: FraudFlagSeverity.MEDIUM,
   })
   severity: FraudFlagSeverity
 
   @Column({
-    type: "enum",
+    type: "simple-enum",
     enum: FraudFlagStatus,
     default: FraudFlagStatus.OPEN,
   })
@@ -91,3 +91,4 @@ export class FraudFlag {
   @JoinColumn({ name: "referralId" })
   referral: Referral
 }
+

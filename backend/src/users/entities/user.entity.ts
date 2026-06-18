@@ -30,7 +30,7 @@ export class User {
   passwordHash: string
 
   @Column({
-    type: "enum",
+    type: "simple-enum",
     enum: ["talent", "client", "manager"],
     default: "client",
   })
@@ -109,3 +109,4 @@ export class User {
   @OneToOne(() => TalentProfile, (tp) => tp.user)
   talentProfile: TalentProfile
 }
+

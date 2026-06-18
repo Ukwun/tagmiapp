@@ -33,7 +33,7 @@ export class WithdrawalRequest {
   amount: number
 
   @Column({
-    type: "enum",
+    type: "simple-enum",
     enum: WithdrawalStatus,
     default: WithdrawalStatus.PENDING,
   })
@@ -64,3 +64,4 @@ export class WithdrawalRequest {
   @JoinColumn({ name: "userId" })
   user: User
 }
+

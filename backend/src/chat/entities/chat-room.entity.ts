@@ -19,7 +19,7 @@ export class ChatRoom {
   @Column()
   name: string
 
-  @Column({ type: "enum", enum: ["direct", "group", "booking"], default: "direct" })
+  @Column({ type: "simple-enum", enum: ["direct", "group", "booking"], default: "direct" })
   type: "direct" | "group" | "booking"
 
   @Column("uuid", { nullable: true })

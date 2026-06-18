@@ -66,7 +66,7 @@ export class TalentProfile {
   responseTime: number
 
   @Column({
-    type: "enum",
+    type: "simple-enum",
     enum: ["available", "busy", "unavailable"],
     default: "available",
   })
@@ -94,3 +94,4 @@ export class TalentProfile {
   @JoinColumn({ name: "userId" })
   user: User
 }
+

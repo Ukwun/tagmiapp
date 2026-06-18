@@ -20,7 +20,7 @@ export class Content {
   @Column("uuid")
   userId: string
 
-  @Column({ type: "enum", enum: ["text", "image", "video", "audio"] })
+  @Column({ type: "simple-enum", enum: ["text", "image", "video", "audio"] })
   contentType: "text" | "image" | "video" | "audio"
 
   @Column({ nullable: true })
@@ -168,3 +168,4 @@ export class Content {
   )
   contentComments: Comment[]
 }
+

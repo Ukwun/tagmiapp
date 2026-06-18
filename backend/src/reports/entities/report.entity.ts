@@ -45,13 +45,13 @@ export class Report {
   reporter: User
 
   @Column({
-    type: "enum",
+    type: "simple-enum",
     enum: ReportType,
   })
   type: ReportType
 
   @Column({
-    type: "enum",
+    type: "simple-enum",
     enum: ReportReason,
   })
   reason: ReportReason
@@ -69,7 +69,7 @@ export class Report {
   targetCommentId: string
 
   @Column({
-    type: "enum",
+    type: "simple-enum",
     enum: ReportStatus,
     default: ReportStatus.PENDING,
   })
@@ -78,3 +78,4 @@ export class Report {
   @CreateDateColumn()
   createdAt: Date
 }
+

@@ -24,7 +24,7 @@ export class Booking {
   title: string
 
   @Column({
-    type: "enum",
+    type: "simple-enum",
     enum: ["pending", "accepted", "rejected", "in_progress", "completed", "cancelled", "paid"],
     default: "pending",
   })

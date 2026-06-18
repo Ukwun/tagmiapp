@@ -26,7 +26,7 @@ export class EngagementSignal {
   @Column()
   postId: string
 
-  @Column({ type: "enum", enum: ["video", "audio", "image", "text"] })
+  @Column({ type: "simple-enum", enum: ["video", "audio", "image", "text"] })
   contentType: "video" | "audio" | "image" | "text"
 
   @Column({ type: "float", default: 0 })
@@ -58,3 +58,4 @@ export class EngagementSignal {
   @JoinColumn({ name: "contentId" })
   content: Content
 }
+

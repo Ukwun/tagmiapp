@@ -38,7 +38,7 @@ export class Notification {
   actor: User
 
   @Column({
-    type: "enum",
+    type: "simple-enum",
     enum: NotificationType,
   })
   type: NotificationType
@@ -64,3 +64,4 @@ export class Notification {
   @UpdateDateColumn()
   updatedAt: Date
 }
+

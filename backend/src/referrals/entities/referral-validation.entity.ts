@@ -28,7 +28,7 @@ export class ReferralValidation {
   referralId: string
 
   @Column({
-    type: "enum",
+    type: "simple-enum",
     enum: ValidationCheckpoint,
   })
   checkpoint: ValidationCheckpoint
@@ -46,3 +46,4 @@ export class ReferralValidation {
   @JoinColumn({ name: "referralId" })
   referral: Referral
 }
+

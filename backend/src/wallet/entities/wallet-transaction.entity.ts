@@ -32,7 +32,7 @@ export class WalletTransaction {
   walletId: string
 
   @Column({
-    type: "enum",
+    type: "simple-enum",
     enum: TransactionType,
   })
   type: TransactionType
@@ -62,3 +62,4 @@ export class WalletTransaction {
   @JoinColumn({ name: "walletId" })
   wallet: Wallet
 }
+

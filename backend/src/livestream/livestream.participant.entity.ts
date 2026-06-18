@@ -27,7 +27,7 @@ livestreamId: string;
 userId: string;
 
 @Column({
-type: "enum",
+type: "simple-enum",
 enum: LivestreamRole,
 default: LivestreamRole.PARTICIPANT,
 })
@@ -50,3 +50,4 @@ leftAt: Date;
   @JoinColumn({ name: "userId" })
   user: User;
 }
+

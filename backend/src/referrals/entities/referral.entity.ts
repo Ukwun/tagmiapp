@@ -40,7 +40,7 @@ export class Referral {
   referralCode: string
 
   @Column({
-    type: "enum",
+    type: "simple-enum",
     enum: ReferralStatus,
     default: ReferralStatus.CLICKED,
   })
@@ -87,3 +87,4 @@ export class Referral {
   @OneToMany(() => ReferralValidation, (v) => v.referral)
   validations: ReferralValidation[]
 }
+
