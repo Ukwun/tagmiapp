@@ -58,7 +58,7 @@ export class UserCategoryPreference {
 
   // When the user last engaged with content in this category
   // Used for decay (categories not engaged with for 30+ days drift back to neutral)
-  @Column({ type: "timestamptz", nullable: true, name: "last_engagement_at" })
+  @Column({ type: "datetime", nullable: true, name: "last_engagement_at" })
   lastEngagementAt: Date | null
 
   @CreateDateColumn({ name: "created_at" })
